@@ -1,0 +1,107 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  
+  title Register Baby
+  style.
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    
+    }
+    .navbar {
+    background-color: #333;
+    overflow: hidden;
+    }
+    .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    justify-content: left;
+    }
+    .navbar li {
+    float: left;
+    }
+    .navbar li a {
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+    }
+    .navbar li a:hover {
+    background-color: #575757;
+    }
+    .dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    }
+    .card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 100px;
+    text-align: center;
+    width: 200px;
+    }
+    .card h2 {
+    margin-top: 0;
+    }
+    .card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    }
+    .card a:hover {
+    background-color: #0056b3;
+    }
+.navbar
+  ul
+    li
+      a DAYSTAR DAYCARE          
+    li
+      a(href='/') Dashboard
+    li
+      a(href='/BabyList') Babies
+    li
+      a(href='/sitterList') Sitters
+    li
+      a(href='/ProcurementList') Procurement
+    li
+      a(href='/dollList') Dollstore
+div.form-container(style='display: flex; justify-content: center; padding-top: 30px;')    
+ div(style='background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px;')
+  form(action='/BabyCheckIn?id='+ baby._id method='POST' style='display: flex; flex-direction: column; ')
+    h2(style='text-align: center;') Register Baby
+    label(for='babyName' style='margin-top: 10px;') Name of the Baby:
+    input#babyName(type='text' value=baby.babyName name='babyName' required='')
+    label(for='location' style='margin-top: 10px;') Location
+    input#location(type='text' value=baby.location name='location' required='')
+    label(for='personBrought' style='margin-top: 10px;') Baby Brought By
+    select#personBrought(name='personBrought' value=baby.babyName required='')
+      option(value='' disabled selected) Select an option
+      option(value='mother') Mother
+      option(value='father') Father
+      option(value='guardian') Guardian
+      option(value='other') Other
+    label(for='arrivalTime' style='margin-top: 10px;') Time of Arrival:
+    input#arrivalTime(type='time' name='arrivalTime' required='')
+    input#status(type='hidden' value='checkedIn' name='status' required='')
+    label(for='periodOfStay' style='margin-top: 10px;') Period of Stay:
+    input#periodOfStay(type='number' name='periodOfStay' step="3" required='')
+    label(for='babyNumber'  style='margin-top: 10px;') Baby Number:
+    input#babyNumber(type='text' value=baby.babyNumber name='babyNumber' min="0" required='')
+    button(type='submit' style='margin-top: 20px; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;') CheckIn

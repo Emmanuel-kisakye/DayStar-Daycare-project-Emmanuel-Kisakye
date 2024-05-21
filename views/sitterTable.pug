@@ -1,0 +1,106 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title sitter list
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet')
+  style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+      }
+      .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+      }
+      .navbar li {
+        float: right;
+      }
+      .navbar li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+      .navbar li a:hover {
+        background-color: #575757;
+      }
+      .dashboard {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+      }
+      .container h2 a {
+        margin-left:10px;
+      }
+  body
+    .navbar
+      ul
+        li
+          a(href='/') Dashboard
+        li
+          a(href='/BabyList') Babies
+        li
+          a(href='/sitterList') Sitters
+        li
+          a(href='/ProcurementList') Procurement
+        li
+          a(href='/dollList') Dollstore  
+  body
+    .container.mt-5
+      h2.text-center SITTERS   
+                     a.btn.btn-primary.btn-sm(href='/sitter') Register
+                     a.btn.btn-primary.btn-sm(href='/SittersCheckedInList') Checked In
+      table.table.table-striped
+        thead.text-bg-dark
+          tr
+            th Name
+            th Location
+            th DOB
+            th Gender
+            th Next of Kin
+            th NIN
+            th Recommender's Name
+            th Religion
+            th Education Level
+            th Sitter Number
+            th Contact
+            th CheckIn
+            th Delete
+        tbody
+          if sitters.length
+            each sitter in sitters
+              tr
+                td #{sitter.names}
+                td #{sitter.location}
+                td #{sitter.dob}
+                td #{sitter.gender}
+                td #{sitter.nextOfKin}
+                td #{sitter.nin}
+                td #{sitter.recommenderName}
+                td #{sitter.religion}
+                td #{sitter.educationLevel}
+                td #{sitter.sitterNumber}
+                td #{sitter.contacts}
+                td
+                  a.btn.btn-primary.btn-sm(href='/sitterCheckIn/'+ sitter._id) CheckIn 
+                td
+                  form(method="POST" action="/deleteSitter")
+                      input(type="hidden" name="id" value= sitter._id)
+                      button.btn.btn-block.btn-danger(type="submit") Delete
+          else
+            tr
+              td(colspan='12') No sitters available
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js')

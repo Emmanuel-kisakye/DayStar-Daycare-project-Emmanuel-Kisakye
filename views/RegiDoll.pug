@@ -1,0 +1,53 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Doll Order Form
+  style.
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    }
+    
+    .form-container {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-container h1 {
+    margin-bottom: 20px;
+    }
+    .form-container input {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+    .form-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    }
+    .form-container button:hover {
+    background-color: #218838;
+    }
+    
+.form-container
+  h1 Doll Registration
+  form(action='/Doll' method='POST')
+    input(type='text' name='dollname' placeholder='Doll Name' )
+    input(type='number' name='quantity' step='1' placeholder='Quantity'  min='1')
+    input(type='number' name='cost' placeholder='Cost' step='2000'  min='0')
+    button(type='submit') Submit

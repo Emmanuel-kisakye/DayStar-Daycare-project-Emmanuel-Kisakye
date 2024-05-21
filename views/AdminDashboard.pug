@@ -1,0 +1,199 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Admin Dashboard
+  style.
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    }
+    .navbar {
+    background-color: #333;
+    overflow: hidden;
+    }
+    .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    justify-content: left;
+    }
+    .navbar li {
+    float: left;
+    }
+    .navbar li a {
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+    }
+    .navbar li a:hover {
+    background-color: #575757;
+    }
+    .dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    }
+    .card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 100px;
+    text-align: center;
+    width: 200px;
+    }
+    .card h2 {
+    margin-top: 0;
+    }
+    .card a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    }
+    .card a:hover {
+    background-color: #0056b3;
+    }
+.navbar
+  ul
+    li
+      a DAYSTAR DAYCARE          
+    li
+      a(href='/') Dashboard
+    li
+      a(href='/BabyList') Babies
+    li
+      a(href='/sitterList') Sitters
+    li
+      a(href='/ProcurementList') Procurement
+    li
+      a(href='/dollList') Dollstore
+.dashboard
+  #babies.card
+    h2 Babies
+    p Manage Data about babies
+    a(href="/BabyList")#babies View Details
+  #sitters.card
+    h2 Sitters
+    p Manage Data about Sitters
+    a(href="/sitterList")#sitters View Details
+  #payments.card
+    h2 Procurement
+    p Manage and track payments
+    a(href="/ProcurementList")#payment View Details
+div(style='display: flex; justify-content: center; align-items: center; height: 50vh; background-color: #f4f4f4;')
+  // To-Do Card
+  div(style='position: fixed; background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px; text-align: center;')
+    h3 To-Do List
+    input#todoInput(type='text' placeholder='Add a new task' style='width: 80%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;')
+    button(onclick='addTodo()' style='padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 4px; cursor: pointer;') Add Task
+    ul#todoList(style='list-style-type: none; padding: 0; margin-top: 20px;')
+
+script.
+  //babies
+  // Select the button element
+  var button = document.getElementById('babies');
+  // Attach click event listener to the button
+  button.addEventListener('click', function() {
+  // Redirect to a new page
+  window.location.href = 'views/register_baby.pug'; //redirect page url
+  });
+  //sitters.......
+  // Select the button element
+  let button = document.getElementById('sitters');
+  // Attach click event listener to the button
+  button.addEventListener('click', function() {
+  // Redirect to a new page
+  window.location.href = ''; //redirect page url
+  });
+  //payments.................
+  // Select the button element
+  let button = document.getElementById('payment');
+  // Attach click event listener to the button
+  button.addEventListener('click', function() {
+  // Redirect to a new page
+  window.location.href = ''; //redirect page url
+  });
+  //doll store.................
+  // Select the button element
+  let button = document.getElementById('dolls');
+  // Attach click event listener to the button
+  button.addEventListener('click', function() {
+  // Redirect to a new page
+  window.location.href = ''; //redirect page url
+  });
+script.
+  document.addEventListener('DOMContentLoaded', (event) => {
+  loadTodos();
+  });
+  function addTodo() {
+  var input = document.getElementById('todoInput');
+  var todoText = input.value.trim();
+  if (todoText !== "") {
+  var todoList = getTodos();
+  todoList.push(todoText);
+  saveTodos(todoList);
+  renderTodoList();
+  input.value = "";
+  }
+  }
+  function getTodos() {
+  var todos = localStorage.getItem('todoList');
+  if (todos) {
+  return JSON.parse(todos);
+  }
+  return [];
+  }
+  function saveTodos(todos) {
+  localStorage.setItem('todoList', JSON.stringify(todos));
+  }
+  function loadTodos() {
+  renderTodoList();
+  }
+  function renderTodoList() {
+  var todoList = getTodos();
+  var ul = document.getElementById('todoList');
+  ul.innerHTML = '';
+  todoList.forEach((todoText, index) => {
+  var li = document.createElement('li');
+  li.style.padding = "10px";
+  li.style.borderBottom = "1px solid #ddd";
+  li.style.display = "flex";
+  li.style.justifyContent = "space-between";
+  li.style.alignItems = "center";
+  var textSpan = document.createElement('span');
+  textSpan.textContent = todoText;
+  var deleteButton = document.createElement('button');
+  deleteButton.textContent = "Complete";
+  deleteButton.style.padding = "5px 10px";
+  deleteButton.style.border = "none";
+  deleteButton.style.backgroundColor = "#FF6347";
+  deleteButton.style.color = "white";
+  deleteButton.style.borderRadius = "4px";
+  deleteButton.style.cursor = "pointer";
+  deleteButton.onclick = function() {
+  deleteTodo(index);
+  };
+  li.appendChild(textSpan);
+  li.appendChild(deleteButton);
+  ul.appendChild(li);
+  });
+  }
+  function deleteTodo(index) {
+  var todoList = getTodos();
+  todoList.splice(index, 1);
+  saveTodos(todoList);
+  renderTodoList();
+  }

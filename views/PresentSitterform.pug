@@ -1,0 +1,91 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Present
+  style.
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    }
+    .card {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+    margin-bottom: 20px;
+    }
+    label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    }
+    input[type="text"],
+    input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    }
+    input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    input[type="submit"]:hover {
+    background-color: #0056b3;
+    }
+     .navbar {
+    background-color: #333;
+    overflow: hidden;
+    }
+    .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    justify-content: left;
+    }
+    .navbar li {
+    float: left;
+    }
+    .navbar li a {
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 14px 20px;
+    text-decoration: none;
+    }
+    .navbar li a:hover {
+    background-color: #575757;
+    }
+body
+.card
+  form#registrationForm(action='/sitterCheckIn?id='+sitter._id  method='POST')
+    .form-group
+      label(for='name') Sitter Name:
+      input#names(type='text' value=sitter.names name='names' required='')
+    .form-group
+      label(for='number') Sitter Number:
+      input#sitterNumber(type='number' value=sitter.sitterNumber min="0" name='sitterNumber' required='')
+    .form-group
+      label(for='contact') Contact:
+      input#contacts(type='text' value=sitter.contacts name='contacts' required='')
+    .form-group
+      label(for='time') Arrival Time:
+      input#time(type='time' value=sitter.time name='time' required='')
+    .form-group
+      input#status(type="hidden" name="status" value="CheckedIn")
+    input(type='submit' value='Submit')
